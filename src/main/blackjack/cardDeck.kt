@@ -1,30 +1,39 @@
+import java.util.random.RandomGenerator
+import kotlin.random.Random
+
 /**
  * Class for 52 usual card deck
  * TODO: all methods, default deck, shuffle
  */
-class CardDeck() {
+class CardDeck(packs: Int) {
 
-	private val deck = generateDeck()
+	var cards = generateDeck(packs)
 
-	private fun generateDeck(): List<Card> {
+	private fun generateDeck(packs: Int): MutableList<Card> {
 		val result = mutableListOf<Card>()
-		for (rank in Card.Rank.entries) {
-			for (suit in Card.Suit.entries) {
-				result.add(Card(suit, rank))
+		repeat(packs) {
+			for (rank in Card.Rank.entries) {
+				for (suit in Card.Suit.entries) {
+					result.add(Card(suit, rank))
+				}
 			}
 		}
 		return result
 	}
 
-	fun printDeck() {
-		println(deck)
+	fun shuffleDeck() = cards.shuffle()
+
+	fun getCard(deck: List<Card>) {
+
 	}
+
 	/**
 	 * Generic card class for type safety
 	 */
 	data class Card(
 		val suit: Suit,
-		val rank: Rank
+		val rank: Rank,
+		val visible: Boolean = true
 	) {
 		/**
 		 * Card suit enum
@@ -35,6 +44,7 @@ class CardDeck() {
 			Hearts,
 			Spades
 		}
+
 		/**
 		 * Card rank enum
 		 */
@@ -55,11 +65,4 @@ class CardDeck() {
 		}
 
 	}
-
-
-}
-
-fun main() {
-	val cards = CardDeck()
-	cards.printDeck()
 }
