@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "org.openCasino"
-version = "1.0-SNAPSHOT"
+version = "1.0.1"
 
 repositories {
     mavenCentral()
@@ -21,9 +21,18 @@ tasks.test {
 }
 
 tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "21"
+    kotlinOptions.jvmTarget = "1.8"
 }
 
 application {
-    mainClass.set("MainKt")
+    mainClass.set("Casino")
+
+}
+
+sourceSets {
+    main {
+        kotlin {
+            srcDirs("src/main/blackjack", "src/main/casino")
+        }
+    }
 }
